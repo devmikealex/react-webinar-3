@@ -26,3 +26,12 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }
+
+function* getID() {
+  let id = 0
+  while (1) {
+      id++
+      yield id
+  }
+}
+export const genGetID = getID()
