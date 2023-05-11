@@ -27,11 +27,16 @@ export function createElement(name, props = {}, ...children) {
   return element;
 }
 
-function* getID() {
-  let id = 0
-  while (1) {
+// Генератор уникальных кодов
+function generateIDfunc() {
+  function* getID() {
+    let id = 0
+    while (1) {
       id++
       yield id
+    }
   }
+  const genGetID = getID()
+  return () => genGetID.next().value
 }
-export const genGetID = getID()
+export const generateID = generateIDfunc()
