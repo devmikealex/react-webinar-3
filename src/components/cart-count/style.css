@@ -1,0 +1,8 @@
+.CartCount {
+    display: flex;
+    gap: 1rem;
+    margin-right: 2rem;
+}
+.CartCount__count{
+    font-weight: bold;
+}
