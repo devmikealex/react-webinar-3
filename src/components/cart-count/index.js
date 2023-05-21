@@ -1,26 +1,52 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { numberToPrice, plural } from '../../utils'
+import { cn as bem } from '@bem-react/classname'
 import './style.css'
 
-function CartCount({list}) {
-  let fullPrice = 0, count = 0
+function CartCount({ list, cartVariant }) {
+  const cn = bem('CartCount')
 
-  const a = list.filter((item) => {
-    if(item.cartCount){
+  let fullPrice = 0
+  let count = 0
+
+  list.forEach((item) => {
+    if (item.cartCount) {
       fullPrice += item.price * item.cartCount
       count += item.cartCount
-      return true
     }
   })
 
-  const countInfo = count ? `${count} товар${plural(count, {one: '', few: 'а', many: 'ов'})} / ${numberToPrice(fullPrice)}` : 'пусто'
+  const countInfo = count
+    ? `${count} ${plural(count, {
+        one: 'товар',
+        few: 'товара',
+        many: 'товаров',
+      })} / ${numberToPrice(fullPrice)}`
+    : 'пусто'
 
+  if (cartVariant)
+    return (
+      <div className={cn({ variant: true })}>
+        <div className={cn('text')}>Итого:</div>
+        <div className={cn('count')}>{numberToPrice(fullPrice)}</div>
+      </div>
+    )
   return (
-    <div className='CartCount'>
-      <div className='CartCount__text'>В корзине:</div>
-      <div className='CartCount__count'>{countInfo}</div>
+    <div className={cn()}>
+      <div className={cn('text')}>В корзине:</div>
+      <div className={cn('count')}>{countInfo}</div>
     </div>
   )
+}
+
+CartCount.propTypes = {
+  list: PropTypes.array,
+  CartCount: PropTypes.bool
+}
+
+CartCount.defaultProps = {
+  list: [],
 }
 
 export default React.memo(CartCount)

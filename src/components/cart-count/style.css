@@ -1,8 +1,16 @@
 .CartCount {
-    display: flex;
-    gap: 1rem;
-    margin-right: 2rem;
+  display: flex;
+  gap: 1rem;
+  margin-right: 2rem;
 }
-.CartCount__count{
-    font-weight: bold;
+
+.CartCount_variant {
+  justify-content: flex-end;
+  padding-right: 109px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.CartCount-count {
+  font-weight: bold;
 }
